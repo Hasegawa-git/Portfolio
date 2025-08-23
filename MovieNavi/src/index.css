@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-brand-dark text-zinc-100;
+}
+
+/* 使い回す薄いUIユーティリティ */
+.card {
+  @apply rounded-2xl border border-zinc-800 bg-black/40;
+}
+
+.chip {
+  @apply rounded-full border border-zinc-700 bg-black/50 px-3 py-1 text-xs;
+}
+
+.kbd {
+  @apply rounded-md border border-zinc-700 bg-black/60 px-2 py-0.5 text-[11px];
+}
+
+.btn {
+  @apply rounded-xl font-semibold;
+}
+
+.btn-red {
+  @apply btn bg-brand-red hover:opacity-90;
+}
+
+.btn-ghost {
+  @apply btn border border-zinc-700 hover:bg-zinc-800;
+}
