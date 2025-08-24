@@ -18,10 +18,10 @@ jobs:
         app:
           - name: quizhub
             path: apps/QuizHub
-            bucket: quizhub-bucket
+            bucket: hasegawa-quizhub-bucket
           - name: movienavi
             path: apps/MovieNavi
-            bucket: movienavi-bucket
+            bucket: hasegawa-movienavi-bucket
 
     steps:
       - name: Checkout

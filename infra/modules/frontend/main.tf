@@ -1,7 +1,7 @@
 # infra/modules/frontend/main.tf
 
 resource "aws_s3_bucket" "this" {
-  bucket = "${var.app_name}-bucket"
+  bucket = "hasegawa-${var.app_name}-bucket"
 }
 
 resource "aws_s3_bucket_website_configuration" "this" {
