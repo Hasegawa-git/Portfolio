@@ -1,12 +1,68 @@
-# React + Vite
+## アプリケーション概要
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### アプリケーション名: QuizHub(クイズハブ)
 
-Currently, two official plugins are available:
+### アプリケーションURL: <https://www.takahiro-hasegawa.net/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**QuizHub**は、React + Tailwind CSS + Vite で構築したクイズアプリです。
+ユーザーは名前を入力してクイズを開始し、複数のクイズジャンルから好きなものを選んで楽しむことができます。クイズ終了後には正解数が表示され、ホーム画面に戻って何度でもプレイ可能です。
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 技術スタック
+- **フロントエンド**:
+    - フレームワーク: React（useState、useEffect、ContextAPI等）
+    - スタイリング: CSS（Tailwind CSS）
+- **バックエンド**:
+    - 未実装
+- **インフラ**:
+下記のサービスを**Terraform**でlac化して管理しています。
+    - ストレージ: S3 (AWS)
+    - CDN配信: CloudFront (AWS)
+    - ドメイン管理: Route53 (AWS)
+    - HTTPS化: ACM (AWS)
+    - 独自ドメイン取得: お名前.com
+
+
+## ユーザーストーリー
+- **スタート画面**
+    - アプリの特徴や遊び方を確認
+    - 「はじめる」をクリック
+- **ログイン画面**:
+    - フォームにニックネームを入力
+    - 「次へ」をクリック
+- **ジャンル選択画面**:
+    - 複数のクイズジャンルから選択
+- **クイズ画面**:
+    - 問題文を読み、回答を選択肢
+    - 「次へ」をクリック
+- **結果画面**:
+    - 正答数や達成率を確認
+    - 「もう一度挑戦」または「ホームに戻る」を選択
+
+
+## 実行方法
+このプロジェクトをローカル環境で動かすための手順です。
+1. **リポジトリのクローン**:
+    ```bash
+    git clone https://github.com/Hasegawa-git/QuizHub
+    cd QuizHub
+    ```
+2. **パッケージのインストール**:
+    ```bash
+    npm install
+    ```
+3. **開発サーバーの起動**:
+    ```bash
+    npm run dev
+    ```
+
+
+## 今後の展望
+- **機能の追加**:
+    - 制限時間の追加: １問あたりの回答時間を設定します。
+- **UIの改善**:
+    - CSSの調整: より洗練されたUI/UXを目指してデザインを調整します。
+    - アニメーションの導入: 画面遷移やボタンクリック時にアニメーションを追加します。
+- **バックエンドの実装**:
+    - スコアランキング機能: ユーザーのスコアを保存します。
+    - 高度なユーザー認証機能: ログイン機能を導入し、プレイ履歴を管理できるようにします。
