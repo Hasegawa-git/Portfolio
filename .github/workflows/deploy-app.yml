@@ -34,7 +34,12 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ matrix.app.path }}
-        run: npm install
+        run: npm ci
+
+      - name: Inject env for TMDB (MovieNavi only)
+        if: matrix.app.name == 'movienavi'
+        working-directory: ${{ matrix.app.path }}
+        run: echo "VITE_TMDB_API_KEY=${{ secrets.VITE_TMDB_API_KEY }}" >> .env
 
       - name: Build app
         working-directory: ${{ matrix.app.path }}
@@ -48,5 +53,4 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync to S3
-        run: |
-          aws s3 sync ${{ matrix.app.path }}/dist s3://${{ matrix.app.bucket }} --delete
+        run: aws s3 sync ${{ matrix.app.path }}/dist s3://${{ matrix.app.bucket }} --delete
