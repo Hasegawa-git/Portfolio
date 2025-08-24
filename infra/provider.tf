@@ -5,7 +5,7 @@ terraform {
     bucket         = "hasegawa-portfolio-terraform"
     key            = "infra/terraform.tfstate"
     region         = "ap-northeast-1"
-    dynamodb_table = "hasegawa-portfolio-terraform"
+    dynamodb_table = "hasegawa-terraform-locks"
     encrypt        = true
   }
 }
