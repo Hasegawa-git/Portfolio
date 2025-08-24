@@ -1,0 +1,32 @@
+[
+    {
+        "question": "apple の意味は？",
+        "choices": [
+            "りんご",
+            "みかん",
+            "ぶどう",
+            "なし"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "go の過去形は？",
+        "choices": [
+            "goes",
+            "went",
+            "gone",
+            "goed"
+        ],
+        "answer": 1
+    },
+    {
+        "question": "book の複数形は？",
+        "choices": [
+            "books",
+            "bookes",
+            "book",
+            "bookies"
+        ],
+        "answer": 0
+    }
+]
