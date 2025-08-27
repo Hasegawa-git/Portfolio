@@ -22,6 +22,7 @@
       <?php endif; ?>
     </div>
 
+    
     <div class="card-grid" id="case-grid">
       <?php
       $fallback = get_template_directory_uri() . '/img/Hero.png';

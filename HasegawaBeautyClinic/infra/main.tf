@@ -44,6 +44,8 @@ resource "aws_route53_record" "a" {
   ttl     = 300
   records = [aws_lightsail_static_ip.ip.ip_address]
 
+
   # すでに手動で同名レコードがある場合でも上書きできるように
   allow_overwrite = true
 }
+
