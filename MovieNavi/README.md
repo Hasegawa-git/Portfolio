@@ -2,7 +2,7 @@
 
 ### サービス名: Movie Navi(ムービーナビ)
 
-### URL: <https://www.takahiro-hasegawa.net/>
+### URL: <https://movie.takahiro-hasegawa.net/>
 
 **QuizHub**は、React + Tailwind CSS + Vite + API(TMDB) で構築した映画検索アプリです。
 ユーザーは映画を検索することで映画の詳細情報を知ることができます。

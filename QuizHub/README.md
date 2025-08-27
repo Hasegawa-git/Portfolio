@@ -2,7 +2,7 @@
 
 ### アプリケーション名: QuizHub(クイズハブ)
 
-### アプリケーションURL: <https://www.takahiro-hasegawa.net/>
+### アプリケーションURL: <https://quiz.takahiro-hasegawa.net/>
 
 **QuizHub**は、React + Tailwind CSS + Vite で構築したクイズアプリです。
 ユーザーは名前を入力してクイズを開始し、複数のクイズジャンルから好きなものを選んで楽しむことができます。クイズ終了後には正解数が表示され、ホーム画面に戻って何度でもプレイ可能です。
