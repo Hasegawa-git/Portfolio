@@ -41,7 +41,7 @@ resource "aws_s3_bucket_website_configuration" "site" {
   bucket = aws_s3_bucket.site.id
 
   index_document { suffix = "index.html" }
-  error_document { key    = "index.html" }
+  error_document { key = "index.html" }
 }
 
 # --- CloudFront（OAC で S3 へプライベート配信） ---
@@ -100,7 +100,7 @@ resource "aws_s3_bucket_policy" "allow_cf_only" {
         Sid       = "AllowCloudFrontServicePrincipalReadOnly"
         Effect    = "Allow"
         Principal = { Service = "cloudfront.amazonaws.com" }
-        Action    = [ "s3:GetObject" ]
+        Action    = ["s3:GetObject"]
         Resource  = "${aws_s3_bucket.site.arn}/*"
         Condition = {
           StringEquals = {
@@ -114,11 +114,11 @@ resource "aws_s3_bucket_policy" "allow_cf_only" {
 
 # Route53: A レコードで CloudFront へ ALIAS
 resource "aws_route53_record" "app" {
-  zone_id = data.aws_route53_zone.this.zone_id
-  name    = local.fqdn
-  type    = "A"
-  allow_overwrite = true 
-  
+  zone_id         = data.aws_route53_zone.this.zone_id
+  name            = local.fqdn
+  type            = "A"
+  allow_overwrite = true
+
   alias {
     name                   = aws_cloudfront_distribution.cdn.domain_name
     zone_id                = aws_cloudfront_distribution.cdn.hosted_zone_id
