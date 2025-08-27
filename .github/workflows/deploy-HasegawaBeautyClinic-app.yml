@@ -58,15 +58,47 @@ jobs:
           sudo find "$WP_THEME_PATH" -type d -exec chmod 755 {} \;
           sudo find "$WP_THEME_PATH" -type f -exec chmod 644 {} \;
 
-          # WordPress root (themes/../../)
-          WP_ROOT="$(dirname "$WP_THEME_PATH")/.."
+          # --- Detect WordPress root safely ---
+          # Try from the theme path (../../), then common Bitnami locations.
+          CANDIDATES=(
+            "$(realpath "$WP_THEME_PATH/../.." 2>/dev/null || echo "$WP_THEME_PATH/../..")"
+            "/opt/bitnami/wordpress"
+            "/bitnami/wordpress"
+          )
 
-          # WP-CLI (optional)
+          WP_ROOT=""
+          for p in "${CANDIDATES[@]}"; do
+            if [ -f "$p/wp-load.php" ]; then
+              WP_ROOT="$p"
+              break
+            fi
+          done
+
+          if [ -z "$WP_ROOT" ]; then
+            echo "[ERROR] Could not find WordPress root from WP_THEME_PATH='$WP_THEME_PATH'." >&2
+            echo "        Tried: ${CANDIDATES[*]}" >&2
+            exit 1
+          fi
+          echo "[INFO] WordPress root detected: $WP_ROOT"
+
+          # --- Resolve WP-CLI binary ---
+          if [ -z "${WP_CLI_BIN:-}" ]; then
+            if command -v wp >/dev/null 2>&1; then
+              WP_CLI_BIN="$(command -v wp)"
+            elif [ -x "/opt/bitnami/wp-cli/bin/wp" ]; then
+              WP_CLI_BIN="/opt/bitnami/wp-cli/bin/wp"
+            fi
+          fi
+
+          # --- Run WP-CLI if available ---
           if [ -n "${WP_CLI_BIN:-}" ] && [ -x "$WP_CLI_BIN" ]; then
-            # Activate theme on first deploy (ignore if already active)
-            sudo "$WP_CLI_BIN" --path="$WP_ROOT" theme activate "${WP_THEME_SLUG:-}" --allow-root || true
+            echo "[INFO] Using WP-CLI at: $WP_CLI_BIN"
+            # Activate theme on first deploy (ignore error if already active)
+            sudo "$WP_CLI_BIN" --path="$WP_ROOT" theme activate "${WP_THEME_SLUG:-HasegawaBeautyClinic}" --allow-root || true
             sudo "$WP_CLI_BIN" --path="$WP_ROOT" rewrite flush --hard --allow-root
             sudo "$WP_CLI_BIN" --path="$WP_ROOT" cache flush --allow-root || true
+          else
+            echo "[WARN] WP-CLI not found or not executable. Skipping theme activation and cache flush."
           fi
 
           # Bitnami service restart (if available)
