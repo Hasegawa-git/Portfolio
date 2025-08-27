@@ -1,0 +1,67 @@
+name: deploy-HasegawaBeautyClinic-theme
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'HasegawaBeautyClinic/app/wp-theme/**'
+      - '.github/workflows/deploy-HasegawaBeautyClinic-app.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: hbc-theme
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package theme
+        run: |
+          cd HasegawaBeautyClinic/app/wp-theme
+          zip -r /tmp/hbc-theme.zip . -x "*.DS_Store"
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.HBC_SSH_KEY }}
+
+      - name: Upload & deploy on Lightsail
+        env:
+          SSH_HOST: ${{ secrets.HBC_SSH_HOST }}
+          SSH_USER: ${{ secrets.HBC_SSH_USER }}
+          WP_THEME_PATH: ${{ secrets.HBC_WP_THEME_PATH }}
+          WP_CLI_BIN: ${{ secrets.HBC_WP_CLI_BIN }}
+          WP_THEME_SLUG: ${{ secrets.HBC_WP_THEME_SLUG }}
+        run: |
+          scp -o StrictHostKeyChecking=no /tmp/hbc-theme.zip ${SSH_USER}@${SSH_HOST}:/tmp/hbc-theme.zip
+          ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} <<'EOSSH'
+            set -e
+
+            export WP_THEME_PATH="${WP_THEME_PATH}"
+            export WP_CLI_BIN="${WP_CLI_BIN}"
+            export WP_THEME_SLUG="${WP_THEME_SLUG}"
+
+            sudo mkdir -p "$WP_THEME_PATH"
+            sudo rm -rf "$WP_THEME_PATH"/*
+            sudo unzip -o /tmp/hbc-theme.zip -d "$WP_THEME_PATH"
+            sudo rm -f /tmp/hbc-theme.zip
+
+            sudo find "$WP_THEME_PATH" -type d -exec chmod 755 {} \;
+            sudo find "$WP_THEME_PATH" -type f -exec chmod 644 {} \;
+
+            WP_ROOT="$(dirname "$WP_THEME_PATH")/.."
+
+            if [ -n "$WP_CLI_BIN" ] && [ -x "$WP_CLI_BIN" ]; then
+              sudo "$WP_CLI_BIN" --path="$WP_ROOT" theme activate "$WP_THEME_SLUG" --allow-root || true
+              sudo "$WP_CLI_BIN" --path="$WP_ROOT" rewrite flush --hard --allow-root
+              sudo "$WP_CLI_BIN" --path="$WP_ROOT" cache flush --allow-root || true
+            fi
+
+            if [ -f /opt/bitnami/ctlscript.sh ]; then
+              sudo /opt/bitnami/ctlscript.sh restart php-fpm || true
+              sudo /opt/bitnami/ctlscript.sh restart apache || true
+            fi
+          EOSSH

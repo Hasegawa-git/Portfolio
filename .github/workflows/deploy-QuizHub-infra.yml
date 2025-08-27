@@ -1,0 +1,62 @@
+name: deploy-QuizHub-infra
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'QuizHub/infra/**'
+      - '.github/workflows/deploy-QuizHub-infra.yml'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: plan / apply / destroy
+        type: choice
+        options: [plan, apply, destroy]
+        default: plan
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: quizhub-infra
+  cancel-in-progress: false
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: QuizHub/infra
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt
+        run: terraform fmt -check
+
+      - name: Terraform init
+        run: terraform init -upgrade
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform plan
+        if: ${{ github.event_name == 'push' || inputs.action == 'plan' }}
+        run: terraform plan -input=false
+
+      - name: Terraform apply
+        if: ${{ inputs.action == 'apply' }}
+        run: terraform apply -auto-approve -input=false
+
+      - name: Terraform destroy
+        if: ${{ inputs.action == 'destroy' }}
+        run: terraform destroy -auto-approve -input=false

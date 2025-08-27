@@ -1,0 +1,172 @@
+<!-- static/html/treatment.html -->
+
+<!doctype html>
+<html lang="ja">
+
+<!-- ========== 【common】head:start ========== -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hasegawa Beauty Clinic</title>
+  <meta name="description" content="あなたらしさを、もっと美しく。経験豊富な医師による丁寧なカウンセリングと、安全性を最優先にした施術をご提供します。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hasegawa Beauty Clinic">
+  <meta property="og:description" content="あなたらしさを、もっと美しく。">
+  <meta property="og:image" content="assets/img/ogp.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<!-- ========== 【common】head:end ========== -->
+
+<body>
+  <!-- ========== 【common】header:start ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Hasegawa Beauty Clinic ホームへ">
+        <span class="logo-mark">HB</span><span class="logo-text">Hasegawa Beauty Clinic</span>
+      </a>
+      <button class="nav-toggle" aria-controls="global-nav" aria-expanded="false" aria-label="メニューを開閉">☰</button>
+      <nav id="global-nav" class="nav" aria-label="グローバルナビゲーション">
+        <ul>
+          <li><a href="treatments.html">施術一覧</a></li>
+          <li><a href="cases.html">症例</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+          <li><a href="clinic.html">クリニック紹介</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="careers.html">採用情報</a></li>
+        </ul>
+        <a class="btn btn-primary header-cta" href="contact.html">予約・お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+  <div class="overlay" hidden></div>
+  <!-- ========== 【common】header:end ========== -->
+
+  <!-- ========== 【page】main:start ========== -->
+  <main class="page">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="パンくず">
+        <a href="index.html">Home</a> › <a href="treatments.html">施術一覧</a> › <span>二重整形</span>
+      </nav>
+
+      <header class="detail-hero">
+        <div>
+          <h1 class="page-title">二重整形</h1>
+          <p class="lede">自然で美しい二重ラインをデザイン。腫れを最小限に抑え、あなたの目の形に合わせた施術をご提案します。</p>
+          <div class="price">価格の目安: <strong>¥99,000〜</strong></div>
+          <div class="actions"><a class="btn btn-primary" href="contact.html">この施術を予約する</a></div>
+        </div>
+        <img src="../assets/Hero.png" alt="二重整形のイメージ">
+      </header>
+
+      <section class="section">
+        <h2>特長</h2>
+        <ul class="list-check">
+          <li>腫れづらい糸を用いた埋没法</li>
+          <li>シミュレーションでデザイン確認</li>
+          <li>ダウンタイムを短縮する独自手技</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>こんな方におすすめ</h2>
+        <div class="columns">
+          <ul>
+            <li>左右差が気になる</li>
+            <li>奥二重をくっきり見せたい</li>
+            <li>毎日のアイプチから卒業したい</li>
+          </ul>
+          <ul>
+            <li>できるだけ腫れを抑えたい</li>
+            <li>ナチュラルな仕上がりにしたい</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>料金表</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>プラン</th>
+                <th>内容</th>
+                <th>料金（税込）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ライト</td>
+                <td>埋没2点留め</td>
+                <td>¥99,000</td>
+              </tr>
+              <tr>
+                <td>スタンダード</td>
+                <td>埋没3点留め</td>
+                <td>¥132,000</td>
+              </tr>
+              <tr>
+                <td>プレミアム</td>
+                <td>埋没4点留め / 保証1年</td>
+                <td>¥176,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>ダウンタイム・リスク</h2>
+        <p class="muted small">腫れ・内出血・痛み・左右差など。個人差があり、まれに修正が必要になる場合があります。</p>
+      </section>
+
+      <section class="section">
+        <h2>よくある質問</h2>
+        <details>
+          <summary>痛みはありますか？</summary>
+          <p>麻酔を使用するため、施術中の痛みは最小限です。術後は鈍痛や腫れが数日続くことがあります。</p>
+        </details>
+        <details>
+          <summary>どれくらいで腫れは引きますか？</summary>
+          <p>個人差がありますが、1〜2週間で落ち着く方が多いです。</p>
+        </details>
+      </section>
+    </div>
+  </main>
+  <!-- ========== 【page】main:end ========== -->
+
+  <!-- ========== 【common】footer:start ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark">HB</span><span class="logo-text">Hasegawa Beauty Clinic</span></div>
+        <p>自然体の美しさを引き出す、美容医療。</p>
+      </div>
+      <div class="footer-nav">
+        <ul>
+          <li><a href="clinic.html">クリニック紹介</a></li>
+          <li><a href="treatments.html">施術一覧</a></li>
+          <li><a href="cases.html">症例</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="careers.html">採用情報</a></li>
+          <li><a href="contact.html">予約・お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <small>© 2025 Hasegawa Beauty Clinic</small>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+<!-- ========== 【common】footer:end ========== -->
+
+</html>

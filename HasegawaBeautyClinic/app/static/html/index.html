@@ -1,0 +1,273 @@
+<!-- static/html/index.html -->
+
+<!doctype html>
+<html lang="ja">
+
+<!-- ========== 【common】head:start ========== -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hasegawa Beauty Clinic</title>
+  <meta name="description" content="あなたらしさを、もっと美しく。経験豊富な医師による丁寧なカウンセリングと、安全性を最優先にした施術をご提供します。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hasegawa Beauty Clinic">
+  <meta property="og:description" content="あなたらしさを、もっと美しく。">
+  <meta property="og:image" content="assets/img/ogp.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<!-- ========== 【common】head:end ========== -->
+
+<body>
+  <!-- ========== 【common】header:start ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Hasegawa Beauty Clinic ホームへ">
+        <span class="logo-mark">HB</span><span class="logo-text">Hasegawa Beauty Clinic</span>
+      </a>
+      <button class="nav-toggle" aria-controls="global-nav" aria-expanded="false" aria-label="メニューを開閉">☰</button>
+      <nav id="global-nav" class="nav" aria-label="グローバルナビゲーション">
+        <ul>
+          <li><a href="treatments.html">施術一覧</a></li>
+          <li><a href="cases.html">症例</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+          <li><a href="clinic.html">クリニック紹介</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="careers.html">採用情報</a></li>
+        </ul>
+        <a class="btn btn-primary header-cta" href="contact.html">予約・お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+  <div class="overlay" hidden></div>
+  <!-- ========== 【common】header:end ========== -->
+
+  <!-- ========== 【page】main:start ========== -->
+  <main>
+    <!-- ファーストビュー -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="kicker">Portfolio Demo</p>
+          <h1>あなたらしさを、もっと美しく。</h1>
+          <p class="lede">経験豊富な医師による丁寧なカウンセリングと、安全性を最優先にした施術をご提供します。</p>
+          <ul class="list-check" style="margin:12px 0 0">
+            <li>明瞭な料金・無理な勧誘なし</li>
+            <li>症例に基づくわかりやすい説明</li>
+            <li>術後フォロー・オンライン相談対応</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="contact.html">予約する</a>
+            <a class="btn btn-ghost" href="treatments.html">施術一覧を見る</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="../assets/Hero.png" alt="清潔感のある院内の様子">
+        </div>
+      </div>
+    </section>
+
+    <!-- 信頼のポイント（トラストバー） -->
+    <section class="section alt" aria-label="当院の特長">
+      <div class="container">
+        <div class="columns">
+          <ul class="list-check">
+            <li>形成外科・美容外科の協働体制</li>
+            <li>自然光に近い診察照明で精密デザイン</li>
+            <li>痛み・腫れを抑える麻酔・創処置</li>
+          </ul>
+          <ul class="list-check">
+            <li>プライバシー配慮の個室カウンセリング</li>
+            <li>キャッシュレス・医療ローン対応</li>
+            <li>アフターケアも専任スタッフが支援</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 人気の施術 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">人気の施術</h2>
+        <p class="lede">
+          多くの患者さまから選ばれている、当院の代表的な施術メニューです。
+          初めての方にもおすすめできる、安全で効果的なプランをご紹介します。
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <img src="../assets/Hero.png" alt="施術イメージ">
+            <div class="card-body">
+              <h3>二重整形</h3>
+              <p class="muted">¥99,000〜</p>
+              <a class="btn btn-secondary" href="treatment.html">詳細を見る</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="../assets/Hero.png" alt="施術イメージ">
+            <div class="card-body">
+              <h3>クマ取り（下眼瞼）</h3>
+              <p class="muted">¥132,000〜</p>
+              <a class="btn btn-secondary" href="treatment.html">詳細を見る</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="../assets/Hero.png" alt="施術イメージ">
+            <div class="card-body">
+              <h3>ハイフ（HIFU）</h3>
+              <p class="muted">¥55,000〜</p>
+              <a class="btn btn-secondary" href="treatment.html">詳細を見る</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="../assets/Hero.png" alt="施術イメージ">
+            <div class="card-body">
+              <h3>ボトックス</h3>
+              <p class="muted">¥11,000〜</p>
+              <a class="btn btn-secondary" href="treatment.html">詳細を見る</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- 初めての方へ（ガイド） -->
+        <div class="section" style="padding-top:24px">
+          <h3 class="section-title" style="font-size:20px">初めての方へ</h3>
+          <ol>
+            <li>WEBまたはお電話で予約</li>
+            <li>カウンセリング（ご希望・不安点を丁寧にヒアリング）</li>
+            <li>施術プランと費用のご説明（無理なご提案はいたしません）</li>
+            <li>当日または後日の施術・アフターケア</li>
+          </ol>
+          <p class="small muted">※ 自由診療のため保険適用外です。価格は税込表記。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 症例ハイライト -->
+    <section class="section alt">
+      <div class="container">
+        <h2 class="section-title">症例ハイライト</h2>
+        <p class="lede">
+          実際に施術を受けられた方のビフォー・アフターをご覧いただけます。
+          写真はすべて当院で行った症例で、個人差がございます。
+        </p>
+        <div class="card-row">
+          <article class="case-card"><img src="../assets/Hero.png" alt="Before / After">
+            <h3>二重整形 症例</h3>
+          </article>
+          <article class="case-card"><img src="../assets/Hero.png" alt="Before / After">
+            <h3>目の下のクマ取り 症例</h3>
+          </article>
+          <article class="case-card"><img src="../assets/Hero.png" alt="Before / After">
+            <h3>ハイフ 症例</h3>
+          </article>
+        </div>
+        <div class="actions"><a class="btn btn-secondary" href="cases.html">症例をもっと見る</a></div>
+      </div>
+    </section>
+
+    <!-- 医師のご紹介 -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">医師のご紹介</h2>
+        <p class="lede">
+          美容外科・形成外科の経験豊富な医師が在籍しています。
+          専門領域に応じたチーム体制で、患者さま一人ひとりに合った治療をご提案します。
+        </p>
+        <div class="card-grid">
+          <article class="card profile">
+            <img src="../assets/Hero.png" alt="医師の写真">
+            <div class="card-body">
+              <h3>長谷川 貴大 医師</h3>
+              <p class="muted">形成外科 / 美容外科</p>
+              <a class="btn btn-tertiary" href="doctors.html">プロフィールを見る</a>
+            </div>
+          </article>
+          <article class="card profile">
+            <img src="../assets/Hero.png" alt="医師の写真">
+            <div class="card-body">
+              <h3>山田 花子 医師</h3>
+              <p class="muted">美容皮膚科</p>
+              <a class="btn btn-tertiary" href="doctors.html">プロフィールを見る</a>
+            </div>
+          </article>
+          <article class="card profile">
+            <img src="../assets/Hero.png" alt="医師の写真">
+            <div class="card-body">
+              <h3>佐藤 太郎 医師</h3>
+              <p class="muted">麻酔科 / 美容外科</p>
+              <a class="btn btn-tertiary" href="doctors.html">プロフィールを見る</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- よくある質問（FAQ） -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">よくある質問</h2>
+        <details>
+          <summary>カウンセリングだけでも大丈夫ですか？</summary>
+          <p>はい、可能です。ご相談のみのご来院も歓迎しています。費用はかかりません（特別記載がある場合を除く）。</p>
+        </details>
+        <details>
+          <summary>支払い方法は？</summary>
+          <p>現金・各種クレジットカード・QR決済に対応しています。医療ローンは事前審査が必要です。</p>
+        </details>
+        <details>
+          <summary>ダウンタイムが心配です。</summary>
+          <p>施術により異なります。ページ内の各施術詳細に目安を記載していますが、個人差があるため診察時にご説明します。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 無料カウンセリング予約 -->
+    <section class="section cta">
+      <div class="container cta-inner">
+        <h2>無料カウンセリング予約</h2>
+        <p>
+          ご相談だけでも歓迎しております。<br>
+          不安や疑問を一緒に解決しながら、最適なプランをご提案いたします。
+        </p>
+        <p>WEBから24時間受付。初めての方もお気軽にご相談ください。</p>
+        <a class="btn btn-primary btn-lg" href="contact.html">予約する</a>
+      </div>
+    </section>
+  </main>
+  <!-- ========== 【page】main:end ========== -->
+
+  <!-- ========== 【common】footer:start ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark">HB</span><span class="logo-text">Hasegawa Beauty Clinic</span></div>
+        <p>自然体の美しさを引き出す、美容医療。</p>
+      </div>
+      <div class="footer-nav">
+        <ul>
+          <li><a href="clinic.html">クリニック紹介</a></li>
+          <li><a href="treatments.html">施術一覧</a></li>
+          <li><a href="cases.html">症例</a></li>
+          <li><a href="doctors.html">医師紹介</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="careers.html">採用情報</a></li>
+          <li><a href="contact.html">予約・お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <small>© 2025 Hasegawa Beauty Clinic</small>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+<!-- ========== 【common】footer:end ========== -->
+
+</html>
