@@ -40,7 +40,7 @@ variable "aws_region" {
 variable "tags" {
   type        = map(string)
   description = "共通タグ"
-  default     = {
+  default = {
     project = "Portfolio"
     app     = "QuizHub"
   }
