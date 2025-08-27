@@ -45,6 +45,10 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Create env file for Vite
+        run: |
+          echo "VITE_TMDB_API_KEY=${{ secrets.VITE_TMDB_API_KEY }}" > .env.production
+
       - name: Build
         run: npm run build
 
