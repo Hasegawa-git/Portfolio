@@ -37,31 +37,41 @@ jobs:
           WP_THEME_SLUG: ${{ secrets.HBC_WP_THEME_SLUG }}
         run: |
           scp -o StrictHostKeyChecking=no /tmp/hbc-theme.zip ${SSH_USER}@${SSH_HOST}:/tmp/hbc-theme.zip
-          ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} <<'EOSSH'
-            set -e
 
-            export WP_THEME_PATH="${WP_THEME_PATH}"
-            export WP_CLI_BIN="${WP_CLI_BIN}"
-            export WP_THEME_SLUG="${WP_THEME_SLUG}"
+          # Pass env vars to the remote shell explicitly, then run our script via bash -s
+          ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} \
+            "WP_THEME_PATH='${WP_THEME_PATH}' WP_CLI_BIN='${WP_CLI_BIN}' WP_THEME_SLUG='${WP_THEME_SLUG}' bash -s" <<'EOSSH'
+          set -euo pipefail
 
-            sudo mkdir -p "$WP_THEME_PATH"
-            sudo rm -rf "$WP_THEME_PATH"/*
-            sudo unzip -o /tmp/hbc-theme.zip -d "$WP_THEME_PATH"
-            sudo rm -f /tmp/hbc-theme.zip
+          # sanity check
+          if [ -z "${WP_THEME_PATH:-}" ]; then
+            echo "[ERROR] WP_THEME_PATH is empty. Set HBC_WP_THEME_PATH secret." >&2
+            exit 1
+          fi
 
-            sudo find "$WP_THEME_PATH" -type d -exec chmod 755 {} \;
-            sudo find "$WP_THEME_PATH" -type f -exec chmod 644 {} \;
+          sudo mkdir -p "$WP_THEME_PATH"
+          sudo rm -rf "$WP_THEME_PATH"/*
+          sudo unzip -o /tmp/hbc-theme.zip -d "$WP_THEME_PATH"
+          sudo rm -f /tmp/hbc-theme.zip
 
-            WP_ROOT="$(dirname "$WP_THEME_PATH")/.."
+          # permissions
+          sudo find "$WP_THEME_PATH" -type d -exec chmod 755 {} \;
+          sudo find "$WP_THEME_PATH" -type f -exec chmod 644 {} \;
 
-            if [ -n "$WP_CLI_BIN" ] && [ -x "$WP_CLI_BIN" ]; then
-              sudo "$WP_CLI_BIN" --path="$WP_ROOT" theme activate "$WP_THEME_SLUG" --allow-root || true
-              sudo "$WP_CLI_BIN" --path="$WP_ROOT" rewrite flush --hard --allow-root
-              sudo "$WP_CLI_BIN" --path="$WP_ROOT" cache flush --allow-root || true
-            fi
+          # WordPress root (themes/../../)
+          WP_ROOT="$(dirname "$WP_THEME_PATH")/.."
 
-            if [ -f /opt/bitnami/ctlscript.sh ]; then
-              sudo /opt/bitnami/ctlscript.sh restart php-fpm || true
-              sudo /opt/bitnami/ctlscript.sh restart apache || true
-            fi
+          # WP-CLI (optional)
+          if [ -n "${WP_CLI_BIN:-}" ] && [ -x "$WP_CLI_BIN" ]; then
+            # Activate theme on first deploy (ignore if already active)
+            sudo "$WP_CLI_BIN" --path="$WP_ROOT" theme activate "${WP_THEME_SLUG:-}" --allow-root || true
+            sudo "$WP_CLI_BIN" --path="$WP_ROOT" rewrite flush --hard --allow-root
+            sudo "$WP_CLI_BIN" --path="$WP_ROOT" cache flush --allow-root || true
+          fi
+
+          # Bitnami service restart (if available)
+          if [ -f /opt/bitnami/ctlscript.sh ]; then
+            sudo /opt/bitnami/ctlscript.sh restart php-fpm || true
+            sudo /opt/bitnami/ctlscript.sh restart apache || true
+          fi
           EOSSH
